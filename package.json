@@ -24,6 +24,6 @@
   },
   "dependencies": {
     "dotparser": "^0.4.0",
-    "ngraph.graph": "18.0.0"
+    "ngraph.graph": "18.0.1"
   }
 }
