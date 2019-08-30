@@ -91,7 +91,10 @@ function addNode(graph, nodeAST, attributesList) {
     var data = parseAttributesAsData(attributesList);
     if (data) {
       graph.addNode(nodeAST.id, data);
-    } else {
+    } 
+    // Only attempt to add in the node if we haven't already added it.
+    // Otherwise we'll lose all our annotations / data.
+    else if (graph.getNode(nodeAST.id) === undefined) {
       graph.addNode(nodeAST.id);
     }
     return [nodeAST.id];
