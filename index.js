@@ -1,6 +1,10 @@
-module.exports = load;
+module.exports = {
+  load: load,
+  hasPositions: function () { return hasPositions; }
+};
 
 var parseDot = require('dotparser');
+var hasPositions = false;
 
 /**
  * Loads graph from 'dot' string.
@@ -89,8 +93,11 @@ function concat(head, tail) {
 function addNode(graph, nodeAST, attributesList) {
   if (nodeAST.type === 'node_id') {
     var data = parseAttributesAsData(attributesList);
+
+    // If the node has metadata, we just add it in assuming it's fine to add.
     if (data) {
       graph.addNode(nodeAST.id, data);
+      hasPositions = (data.pos !== undefined);
     } 
     // Only attempt to add in the node if we haven't already added it.
     // Otherwise we'll lose all our annotations / data.
